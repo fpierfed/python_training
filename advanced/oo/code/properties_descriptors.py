@@ -1,3 +1,11 @@
+"""
+From https://docs.python.org/3/howto/descriptor.html
+
+In general, a descriptor is an object attribute with “binding behavior”, one
+whose attribute access has been overridden by methods in the descriptor
+protocol. Those methods are __get__(), __set__(), and __delete__(). If any of
+those methods are defined for an object, it is said to be a descriptor.
+"""
 from math import pi, sqrt
 
 
