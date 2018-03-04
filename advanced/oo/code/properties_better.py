@@ -8,15 +8,19 @@ class TypeChecker:
         self.name = name
         self.cast = cast
 
-    def __get__(self, instance, cls):
-        return instance.__dict__[self.name]
-
-    def __set__(self, instance, value):
+    def check(self, instance, value):
         if not isinstance(value, self.required_type):
             if self.cast:
                 value = self.required_type(value)
             else:
                 raise TypeError(f'expecting a {self.required_type.__name__}')
+        return value
+
+    def __get__(self, instance, cls):
+        return instance.__dict__[self.name]
+
+    def __set__(self, instance, value):
+        value = self.check(instance, value)
         instance.__dict__[self.name] = value
 
 
@@ -29,10 +33,11 @@ class FloatType(TypeChecker):
 
 
 class PositiveFloatType(FloatType):
-    def __set__(self, instance, value):
-        super().__set__(instance, value)
-        if instance.__dict__[self.name] < 0:
+    def check(self, instance, value):
+        value = super().check(instance, value)
+        if value < 0:
             raise ValueError('expecting a non-negative float')
+        return value
 
 
 class Point:
