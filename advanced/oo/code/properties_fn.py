@@ -22,9 +22,13 @@ def type_check(name, required_type):
     return ivar
 
 
+FloatType = lambda name: type_check(name, float)                        # noqa
+PointType = lambda name: type_check(name, Point)                        # noqa
+
+
 class Circle:
-    radius = type_check('radius', float)
-    center = type_check('center', Point)
+    radius = FloatType('radius')
+    center = PointType('center')
 
     def __init__(self, center, radius):
         self.center = center
