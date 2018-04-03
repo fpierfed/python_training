@@ -9,18 +9,21 @@ def simple():
 
 
 if __name__ == '__main__':
-    g = simple()
     print('Newly created generator')
+    g = simple()
+
     print(f'Instruction pointer: {g.gi_frame.f_lasti}')
     dis.disco(g.gi_code, g.gi_frame.f_lasti)
 
-    next(g)
     print('First next() call')
+    next(g)
+
     print(f'Instruction pointer: {g.gi_frame.f_lasti}')
     dis.disco(g.gi_code, g.gi_frame.f_lasti)
 
-    next(g)
     print('Second next() call')
+    next(g)
+
     print(f'Instruction pointer: {g.gi_frame.f_lasti}')
     dis.disco(g.gi_code, g.gi_frame.f_lasti)
 
