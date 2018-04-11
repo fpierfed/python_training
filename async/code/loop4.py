@@ -65,28 +65,31 @@ class Task:
         self._exception = value
 
 
+def coro(name, n=10):
+    i = 0
+    while i < n:
+        print(f'{name}: {i}')
+        i += 1
+        yield
+    return n
+
+
+def fail(n=10):
+    i = 0
+    while i < n:
+        yield
+        i += 1
+    raise Exception('Done')
+
+
+def mycallback(task):
+    if task.exception:
+        print(f'Task {task.id} raised {task.exception!r}')
+    else:
+        print(f'Task {task.id} result: {task.result}')
+
+
 if __name__ == '__main__':
-    def coro(name, n=10):
-        i = 0
-        while i < n:
-            print(f'{name}: {i}')
-            i += 1
-            yield
-        return n
-
-    def fail(n=10):
-        i = 0
-        while i < n:
-            yield
-            i += 1
-        raise Exception('Done')
-
-    def mycallback(task):
-        if task.exception:
-            print(f'Task {task.id} raised {task.exception!r}')
-        else:
-            print(f'Task {task.id} result: {task.result}')
-
     tasks = [Task(coro('foo')), Task(coro('bar', n=7)), Task(fail(n=3))]
     for task in tasks:
         task.add_done_callback(mycallback)

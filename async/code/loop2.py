@@ -8,15 +8,16 @@ class Task:
         return self._coroutine.__next__()
 
 
-if __name__ == '__main__':
-    def coro(name, n=10):
-        i = 0
-        while i < n:
-            print(f'{name}: {i}')
-            i += 1
-            yield
-        return n
+def coro(name, n=10):
+    i = 0
+    while i < n:
+        print(f'{name}: {i}')
+        i += 1
+        yield
+    return n
 
+
+if __name__ == '__main__':
     tasks = [Task(coro('foo')), Task(coro('bar', n=7))]
     while tasks:
         current = tasks.pop(0)

@@ -32,18 +32,20 @@ class Task:
         return self._callbacks
 
 
+def coro(name, n=10):
+    i = 0
+    while i < n:
+        print(f'{name}: {i}')
+        i += 1
+        yield
+    return n
+
+
+def mycallback(task):
+    print(f'Task {task.id} done')
+
+
 if __name__ == '__main__':
-    def coro(name, n=10):
-        i = 0
-        while i < n:
-            print(f'{name}: {i}')
-            i += 1
-            yield
-        return n
-
-    def mycallback(task):
-        print(f'Task {task.id} done')
-
     tasks = [Task(coro('foo')), Task(coro('bar', n=7))]
     for task in tasks:
         task.add_done_callback(mycallback)
