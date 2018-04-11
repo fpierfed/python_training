@@ -93,6 +93,7 @@ class Loop:
                 current.result = e.value
             except Exception as e:
                 current.exception = e
+                print(f'Warning: Task {current.id} raised {e!r}')
             else:
                 self._tasks.append(current)
             finally:
@@ -167,8 +168,7 @@ if __name__ == '__main__':
     print('All done')
 
     # What are the problems with this simple event loop?
-    # - NEW: what is the role of callbacks?
-    # - NEW: how can we spawn a coroutine from e.g., a callback?
+    # - What is the role of callbacks?
     # - 100% CPU usage
     # - Is round-robing the best scheduling?
     # - What about IO events (e.g., sockets)?

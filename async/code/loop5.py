@@ -123,6 +123,7 @@ if __name__ == '__main__':
 
     # What are the problems with this simple event loop?
     # - NEW: what is the role of callbacks?
+    # - NEW: what about exceptions?
     # - NEW: how can we spawn a coroutine from e.g., a callback?
     # - 100% CPU usage
     # - Is round-robing the best scheduling?
