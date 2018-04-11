@@ -63,6 +63,7 @@ if __name__ == '__main__':
 
     # What are the problems with this simple event loop?
     # - How does one get a hold of the result of a coroutine?
+    # - Can we mix sync and async code?
     # - 100% CPU usage
     # - Is round-robing the best scheduling?
     # - What about IO events (e.g., sockets)?

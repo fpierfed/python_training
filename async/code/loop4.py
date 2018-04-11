@@ -111,6 +111,7 @@ if __name__ == '__main__':
     print('All done')
 
     # What are the problems with this simple event loop?
+    # - Can we mix sync and async code?
     # - 100% CPU usage
     # - Is round-robing the best scheduling?
     # - What about IO events (e.g., sockets)?
