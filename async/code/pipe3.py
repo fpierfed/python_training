@@ -25,7 +25,7 @@ def runner(argv, timeout=0):
             return proc.returncode
 
         # Give other coroutines a chance to run
-        yield from sleep(.1)
+        yield from sleep(.01)
 
 
 def logging_cb(task):
