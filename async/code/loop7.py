@@ -75,14 +75,12 @@ class Loop:
         self._stop = False
 
     def create_task(self, coroutine):
-        if not isinstance(coroutine, Task):
-            task = Task(coroutine)
-        else:
-            task = coroutine
+        if isinstance(coroutine, Task):
+            return coroutine
 
-        if task not in self._tasks:
-            self._tasks.append(task)
-            print(f'Added Task {task.id}')
+        task = Task(coroutine)
+        self._tasks.append(task)
+        print(f'Added Task {task.id}')
         return task
 
     def remove(self, task):
