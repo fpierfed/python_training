@@ -82,8 +82,7 @@ class Loop:
 
         if task not in self._tasks:
             self._tasks.append(task)
-
-        print(f'Added Task {task.id}')
+            print(f'Added Task {task.id}')
         return task
 
     def remove(self, task):
@@ -174,7 +173,7 @@ def wait(coroutines, loop=None):
         tasks.append(task)
 
     # fut acts as a "syncronization barrier" with the help of _callback.
-    # yield from is a shorthand for our usual "while True: next(fut)" loop
+    # yield from is a shorthand for "fut = iter(fot); while True: next(fut)"
     yield from fut
 
     for task in tasks:
