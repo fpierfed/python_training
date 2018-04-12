@@ -85,7 +85,10 @@ class Loop:
         self.tasks.remove(task)
 
     def run_forever(self):
-        while self._tasks:
+        while True:
+            if not self._tasks:
+                continue
+
             current = self._tasks.pop(0)
             try:
                 next(current)
