@@ -10,7 +10,7 @@ def client(address, n):
 
     t0 = time.time()
     for i in range(n):
-        s.send(b'a')
+        s.send(b'Hello')
         s.recv(10000)
     dt = time.time() - t0
     print(f'{n / dt:.02f} roundtrip/s')
