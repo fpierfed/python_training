@@ -1,3 +1,4 @@
+from collections import deque
 import enum
 import heapq
 from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE
@@ -73,7 +74,7 @@ class Task:
 
 class Loop:
     def __init__(self):
-        self._tasks = []
+        self._tasks = deque()
         self._sleeping = []
         self._stop = False
         self._selector = DefaultSelector()
@@ -131,7 +132,7 @@ class Loop:
                 # Let's see if there any task who wants to wake up
                 self._wakeup_sleeping_tasks()
 
-            current = self._tasks.pop(0)
+            current = self._tasks.popleft()
             try:
                 # We assume that each Task will yield some method name and
                 # an argument. Based on that, we decide what to do.
@@ -173,9 +174,11 @@ class Loop:
 
     def sock_sendall(self, sock, data):
         while data:
-            yield 'write_wait', sock
-            n = sock.send(data)
-            data = data[n:]
+            try:
+                n = sock.send(data)
+                data = data[n:]
+            except BlockingIOError:
+                yield 'write_wait', sock
 
     def sock_accept(self, sock):
         yield 'read_wait', sock
