@@ -25,7 +25,6 @@ if __name__ == '__main__':
     try:
         root = sys.argv[1]
     except IndexError:
-        print(f'usage: {sys.argv[0]} PATH', file=sys.stderr)
-        sys.exit(1)
+        root = '.'
 
     print_tree(root)
