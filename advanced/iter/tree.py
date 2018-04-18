@@ -11,12 +11,14 @@ def print_tree(root, indent=''):
 
 
 def _tree(root, indent=''):
+    yield f'{indent}{os.path.basename(root)}/'
+
+    indent += INDENT_STEP
     for entry in sorted(os.scandir(root), key=lambda e: e.name):
         line = f'{indent}{entry.name}'
 
         if entry.is_dir():
-            yield line + '/'
-            yield from _tree(entry.path, indent=indent + INDENT_STEP)
+            yield from _tree(entry.path, indent=indent)
         else:
             yield line
 
