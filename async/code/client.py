@@ -17,4 +17,4 @@ def client(address, n):
 
 
 if __name__ == '__main__':
-    client(('localhost', 9999), 100000)
+    client(('localhost', 9999), 500000)
