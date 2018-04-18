@@ -1,5 +1,6 @@
 import multiprocessing as mp
 import json
+import uuid
 import redis
 
 
@@ -17,6 +18,7 @@ def fib(n):
 
 
 def worker(inputq, outputq):
+    _id = str(uuid.uuid4())
     conn = redis.StrictRedis(REDIS_HOST)
 
     while True:
@@ -25,8 +27,11 @@ def worker(inputq, outputq):
 
         fname, args = work
         fn = globals()[fname]
+
+        argstr = ', '.join([str(a) for a in args])
+        print(f'Worker {_id}: got request for {fname}({argstr})')
         res = fn(*args)
-        conn.lpush(outputq, json.dumps(res))
+        conn.lpush(outputq, json.dumps((_id, res)))
 
 
 if __name__ == '__main__':
