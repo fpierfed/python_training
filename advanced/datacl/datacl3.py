@@ -2,7 +2,7 @@ def dataclass(cls):
     def __init__(self, *args):
         for k, v in zip(cls.__annotations__.keys(), args):
             setattr(self, k, v)
-        post_init = getattr(self, '__postinit__', None)
+        post_init = getattr(self, '__post_init__', None)
         if post_init:
             post_init()
 
