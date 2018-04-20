@@ -1,9 +1,16 @@
 def dataclass(cls):
-    def __init__(self, *args):
+    def __init__(self, *args, **kwargs):
         for k, v in zip(cls.__annotations__.keys(), args):
             setattr(self, k, v)
+        for k, v in kwargs.items():
+            if k not in cls.__annotations__:
+                raise TypeError(
+                    f"__init__() got an unexpected keyword argument '{k}'"
+                )
+            setattr(self, k, v)
+
         post_init = getattr(self, '__post_init__', None)
-        if post_init:
+        if callable(post_init):
             post_init()
 
     def __repr__(self):
@@ -23,9 +30,14 @@ class Point:
     y: int
 
     def __post_init__(self):
-        print('Any further customizaion goes here')
+        print('  <<<Any further customizaion goes here>>>')
 
 
-p = Point(1, 2)
-print(f'str(p) = {p}')
-print(f'repr(p) = {p!r}')
+p1 = Point(1, 2)
+print(f'p1 = {p1}')
+
+p2 = Point(y=1, x=2)
+print(f'p2 = {p2}')
+
+p3 = Point(1, y=2)
+print(f'p3 = {p3}')
