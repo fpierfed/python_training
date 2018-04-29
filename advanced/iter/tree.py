@@ -29,4 +29,10 @@ if __name__ == '__main__':
     except IndexError:
         root = '.'
 
+    # Handle . and ./ gracefully
+    if root in ('.', './'):
+        root = '.'
+    else:
+        root = os.path.abspath(root)
+
     print_tree(root)
