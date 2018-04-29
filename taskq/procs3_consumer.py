@@ -1,3 +1,4 @@
+# procs3_consumer.py
 from multiprocessing import Process
 from procs2 import worker
 from procs3_queue import QueueManager

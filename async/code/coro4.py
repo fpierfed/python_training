@@ -1,3 +1,4 @@
+# coro4.py
 def foo():
     yield 1
     yield 2

@@ -1,3 +1,4 @@
+# arith1.py
 class Point:
     def __init__(self, x, y):
         self.x = x

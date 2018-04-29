@@ -1,3 +1,4 @@
+# coro3.py
 class Foo:
     def __iter__(self):
         print('Hello')

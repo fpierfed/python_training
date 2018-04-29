@@ -1,3 +1,4 @@
+# datacl2.py
 def dataclass(cls):
     def __init__(self, *args, **kwargs):
         for k, v in zip(cls.__annotations__.keys(), args):

@@ -1,3 +1,4 @@
+# aiopipe_dependencies.py
 """
 Like aiopipe.py but with task dependencies. In order to support that, one needs
 to sunblass asyncio.Task and specify a custom task factory.

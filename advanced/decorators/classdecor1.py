@@ -1,3 +1,4 @@
+# classdecor1.py
 from functools import wraps
 import time
 

@@ -1,3 +1,4 @@
+# decor7.py
 from functools import wraps, partial
 import hashlib
 import os

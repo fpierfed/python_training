@@ -1,3 +1,4 @@
+# meta2.py
 class MyType(type):
     def __new__(meta, name, bases, methods):
         print(f'About to create a new {name} class')

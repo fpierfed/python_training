@@ -1,3 +1,4 @@
+# coro2.py
 def foo():
     print('Hello')
     yield
