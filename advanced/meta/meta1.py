@@ -28,10 +28,10 @@ def __str__(self):
 
 
 name = 'Point'
-methods = {
+dct = {
     '__init__': __init__,
     '__repr__': __repr__,
     '__str__': __str__}
 bases = ()          # equivalent in the call below to (object, )
 
-Point = type(name, bases, methods)
+Point = type(name, bases, dct)

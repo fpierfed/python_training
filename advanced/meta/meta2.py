@@ -1,8 +1,12 @@
 # meta2.py
 class MyType(type):
-    def __new__(meta, name, bases, methods):
-        print(f'About to create a new {name} class')
-        return super().__new__(meta, name, bases, methods)
+    def __new__(meta, name, bases, dct):
+        print(f'MyType.__new__({meta!r}, {name}, {bases}, {dct})')
+        return super().__new__(meta, name, bases, dct)
+
+    def __init__(cls, name, bases, dct):
+        print(f'MyType.__init__({cls!r}, {name}, {bases}, {dct})')
+        super().__init__(name, bases, dct)
 
 
 def __init__(self, x, y):
@@ -19,10 +23,10 @@ def __str__(self):
 
 
 name = 'Point'
-methods = {
+dct = {
     '__init__': __init__,
     '__repr__': __repr__,
     '__str__': __str__}
 bases = ()          # equivalent in the call below to (object, )
 
-Point = MyType(name, bases, methods)
+Point = MyType(name, bases, dct)
