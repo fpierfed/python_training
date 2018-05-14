@@ -10,6 +10,9 @@ class TypeChecker:
         self.name = name
 
     def __get__(self, instance, owner=None):
+        if instance is None:
+            # class attribute access
+            return owner.__dict__[self.name]
         return instance.__dict__[self.name]
 
     def __set__(self, instance, value):
