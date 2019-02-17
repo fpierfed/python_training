@@ -44,5 +44,4 @@ if __name__ == '__main__':
     else:
         root = os.path.abspath(root)
 
-    print(args.exclude)
     print_tree(root, exclude_dirs=args.exclude)
