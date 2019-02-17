@@ -12,13 +12,16 @@ class Point:
         """Return developer-friendly string representation."""
         return f'{self.__class__.__name__}({self.x!r}, {self.y!r})'
 
-    def __add__(self, deltas):
-        if not isinstance(deltas, tuple) or len(deltas) != 2:
+    def __add__(self, other):
+        if isinstance(other, Point):
+            x = self.x + other.x
+            y = self.y + other.y
+        if isinstance(other, tuple) and len(other) == 2:
+            x = self.x + other[0]
+            y = self.y + other[1]
+        else:
             raise TypeError('expecting a 2-element tuple')
-        dx, dy = deltas
-        self.x += dx
-        self.y += dy
-        return self
+        return self.__class__(x, y)
 
 
 if __name__ == '__main__':
