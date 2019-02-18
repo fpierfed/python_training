@@ -1,4 +1,4 @@
-# classdecor3.py
+# 10-classdecor.py
 from math import pi
 from numbers import Number
 
