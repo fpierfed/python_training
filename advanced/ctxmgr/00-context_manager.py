@@ -1,4 +1,8 @@
 # 00-context_manager.py
+"""
+There are two main ways to create contect managers: using classes or
+using coroutines. For coroutines, we need to use the contextlib module.
+"""
 
 
 class MyFile:
@@ -8,12 +12,12 @@ class MyFile:
         self._f = None
 
     def __enter__(self):
-        print('__enter__()')
+        print('  Setup')
         self._f = open(self._fname, self._mode)
         return self._f
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        print('__exit__()')
+        print('  Cleanup')
         self._f.close()
 
         if exc_type is not None:
@@ -31,5 +35,6 @@ if __name__ == '__main__':
         print(f'Wrote {msg}')
 
     with MyFile(fname) as f:
-        assert f.readline() == msg
+        inmsg = f.readline()
+        assert inmsg == msg, f'{inmsg} != {msg}'
         print(f'Got {msg}')
