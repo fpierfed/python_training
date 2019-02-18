@@ -1,4 +1,4 @@
-# decor6.py
+# 05-decor.py
 from functools import wraps, partial
 import hashlib
 import os

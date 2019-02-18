@@ -1,4 +1,5 @@
-# decor4.py
+# 04-decor.py
+from functools import wraps
 from hashlib import sha256, sha512, shake_256, blake2b, blake2s, md5
 import os
 import time
@@ -12,18 +13,12 @@ HUNDRED_MB = 10 * TEN_MB
 
 
 def timeit(fn):
+    @wraps(fn)
     def wrapper(*args, **kwargs):
         t0 = time.time()
         res = fn(*args, **kwargs)
         print(f'{fn.__name__}: {time.time() - t0:.02f}s')
         return res
-
-    # Make wrapper play nicer
-    wrapper.__name__ = fn.__name__
-    wrapper.__qualname__ = fn.__qualname__
-    wrapper.__annotations__ = fn.__annotations__
-    wrapper.__module__ = fn.__module__
-    wrapper.__doc__ = fn.__doc__
     return wrapper
 
 

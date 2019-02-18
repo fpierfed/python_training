@@ -1,4 +1,4 @@
-# decor3.py
+# 03-decor.py
 from hashlib import sha256, sha512, shake_256, blake2b, blake2s, md5
 import os
 import time
@@ -17,6 +17,13 @@ def timeit(fn):
         res = fn(*args, **kwargs)
         print(f'{fn.__name__}: {time.time() - t0:.02f}s')
         return res
+
+    # Make wrapper play nicer
+    wrapper.__name__ = fn.__name__
+    wrapper.__qualname__ = fn.__qualname__
+    wrapper.__annotations__ = fn.__annotations__
+    wrapper.__module__ = fn.__module__
+    wrapper.__doc__ = fn.__doc__
     return wrapper
 
 
@@ -34,33 +41,31 @@ def mktestdata(size=HUNDRED_MB):
     return data
 
 
+@timeit
 def test_sha256(data):
     return sha256(data).hexdigest()
 
 
+@timeit
 def test_sha512(data):
     return sha512(data).hexdigest()
 
 
+@timeit
 def test_shake_256(data):
     return shake_256(data).hexdigest()
 
 
+@timeit
 def test_blake2b(data):
     return blake2b(data).hexdigest()
 
 
+@timeit
 def test_blake2s(data):
     return blake2s(data).hexdigest()
 
 
+@timeit
 def test_md5(data):
     return md5(data).hexdigest()
-
-
-test_sha256 = timeit(test_sha256)
-test_sha512 = timeit(test_sha512)
-test_shake_256 = timeit(test_shake_256)
-test_blake2b = timeit(test_blake2b)
-test_blake2s = timeit(test_blake2s)
-test_md5 = timeit(test_md5)

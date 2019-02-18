@@ -1,4 +1,4 @@
-# decor7.py
+# 07-decor.py
 from functools import wraps, partial
 import hashlib
 import os
@@ -12,17 +12,17 @@ TEN_MB = 10 * ONE_MB
 HUNDRED_MB = 10 * TEN_MB
 
 
-def timeit(fn):
-    N = 100
-
-    @wraps(fn)
-    def wrapper(*args, **kwargs):
-        t0 = time.time()
-        for _ in range(N):
-            res = fn(*args, **kwargs)
-        print(f'{fn.__name__}: {(time.time() - t0) / N:.04f}s')
-        return res
-    return wrapper
+def timeit_ntimes(n=10):
+    def timeit(fn):
+        @wraps(fn)
+        def wrapper(*args, **kwargs):
+            t0 = time.time()
+            for _ in range(n):
+                res = fn(*args, **kwargs)
+            print(f'{fn.__name__}: {(time.time() - t0) / n:.04f}s')
+            return res
+        return wrapper
+    return timeit
 
 
 def mktestdata(size=ONE_MB):
@@ -39,9 +39,22 @@ def mktestdata(size=ONE_MB):
     return data
 
 
-@timeit
+@timeit_ntimes(100)
 def test_hash(data, hash_fn):
     return getattr(hashlib, hash_fn)(data).hexdigest()
+
+
+# The above is equivalent to
+# decorator = timeit_ntimes(100)
+# test_hash = decorator(test_hash)
+#
+# This means that I can pre-configure a decorator and use it several times:
+timeit = timeit_ntimes(1)
+
+
+@timeit
+def foo():
+    time.sleep(1)
 
 
 test_sha256 = partial(test_hash, hash_fn='sha256')

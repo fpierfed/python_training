@@ -1,4 +1,4 @@
-# decor2.py
+# 01-decor.py
 from hashlib import sha256, sha512, shake_256, blake2b, blake2s, md5
 import os
 import time
