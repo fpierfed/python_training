@@ -1,4 +1,4 @@
-# patcher.py
+# 04-patcher.py
 """
 We know that from 2012-01-01 to 2012-01-31 all images have RA off by 1 degree.
 Patch them on the fly.

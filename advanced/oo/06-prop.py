@@ -1,4 +1,4 @@
-# prop2.py
+# 06-prop.py
 from math import pi
 from numbers import Number
 
