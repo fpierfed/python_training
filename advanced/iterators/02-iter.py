@@ -1,4 +1,4 @@
-# iter3.py
+# 02-iter.py
 def simple_range(n):
     _current = 0
     while _current < n:
