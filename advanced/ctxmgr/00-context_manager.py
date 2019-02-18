@@ -1,38 +1,35 @@
-# 00-context_namager.py
-"""
-There are two main ways to create contect managers: using classes or
-using coroutines. For coroutines, we need to use the contextlib module.
-"""
-from contextlib import contextmanager
-import sys
+# 00-context_manager.py
 
 
-@contextmanager
-def my_manager(*args, **kwargs):
-    instr = ', '.join([str(a) for a in args] +
-                      [f'{k}={v}' for k, v in kwargs.items()])
-    print(f'Entering with input {instr}')
+class MyFile:
+    def __init__(self, fname, mode='r'):
+        self._fname = fname
+        self._mode = mode
+        self._f = None
 
-    # Run whatever the use wants
-    try:
-        yield 'something'
-    except:                                                             # noqa
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-        print(exc_type, exc_value, exc_traceback)
-        print('Cleaning up')
-    else:
-        print('All good')
-    finally:
-        print('Exiting')
+    def __enter__(self):
+        print('__enter__()')
+        self._f = open(self._fname, self._mode)
+        return self._f
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        print('__exit__()')
+        self._f.close()
+
+        if exc_type is not None:
+            print(exc_type, exc_value, exc_traceback)
+            return False
+        return True
 
 
 if __name__ == '__main__':
-    with my_manager(1, 2, 3, d=4, e=5) as foo:
-        print(f'foo = {foo}')
-        for i in range(5):
-            print(i)
+    fname = '/tmp/foo'
+    msg = 'Hello'
 
-    # What about exceptions?
-    with my_manager(1, 2, 3, d=4, e=5) as foo:
-        print(f'foo = {foo}')
-        print(1 / 0)
+    with MyFile(fname, 'w') as f:
+        f.write(msg)
+        print(f'Wrote {msg}')
+
+    with MyFile(fname) as f:
+        assert f.readline() == msg
+        print(f'Got {msg}')
