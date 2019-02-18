@@ -1,4 +1,4 @@
-# meta1.py
+# 01-meta.py
 # class Point:
 #     def __init__(self, x, y):
 #         self.x = x

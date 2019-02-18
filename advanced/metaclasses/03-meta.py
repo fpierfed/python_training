@@ -1,4 +1,4 @@
-# meta3.py
+# 03-meta.py
 class MyType(type):
     def __new__(meta, name, bases, dct):
         print(f'MyType.__new__({meta!r}, {name}, {bases}, {dct})')
