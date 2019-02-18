@@ -1,4 +1,4 @@
-# gen2.py
+# 02-gen.py
 # Other operations on generators:
 #  - gen.close() thorw a GeneratorExit exception at the yield
 #  - gen.throw(excls, exval, tb) thorw an exception at the yield
