@@ -1,4 +1,4 @@
-# list3.py
+# 07-list.py
 class Point:
     def __init__(self, x, y):
         self.x = x

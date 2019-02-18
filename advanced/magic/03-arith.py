@@ -1,4 +1,4 @@
-# arith1.py
+# 03-arith.py
 class Point:
     def __init__(self, x, y):
         self.x = x
