@@ -23,18 +23,37 @@ class Path:
     def __repr__(self):
         return f'{self.__class__.__name__}({self._points!r})'
 
-    def length(self):
+    def __len__(self):
         return len(self._points)
 
-    def point_at(self, index):
-        return self._points[index]
+    def __getitem__(self, key):
+        return self._points.__getitem__(key)
+
+    def __setitem__(self, key, val):
+        return self._points.__setitem__(key, val)
+
+    def __delitem__(self, key):
+        return self._points.__delitem__(key)
+
+    def __contains__(self, obj):
+        return self._points.__contains__(obj)
+
+    def append(self, item):
+        return self._points.append(item)
+
+    # Should implement other relevant container methods
+    # count -> self._points.count
+    # extend -> self._points.extend
+    # insert -> self._points.insert
+    # pop -> self._points.pop
+    # remove -> self._points.remove
+    # reverse -> self._points.reverse
 
 
 if __name__ == '__main__':
     path = Path([Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 0)])
 
     print('Path:')
-    n = path.length()
-    for i in range(n):
-        print(f'  {path.point_at(i)!r}')
-    print(f'Total: {n} point(s)')
+    for i in range(len(path)):
+        print(f'  {path[i]!r}')
+    print(f'Total: {len(path)} point(s)')

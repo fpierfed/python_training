@@ -1,4 +1,4 @@
-# 01-print.py
+# 02-arith.py
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -14,6 +14,10 @@ class Point:
 
 
 if __name__ == '__main__':
-    p = Point(1, 2)
-    print(f'Users: this is my new point: {p}')
-    print(f'Developers: p = {p!r}')
+    p = Point(0, 0)
+    print(f'p = {p!r}')
+
+    # Add a shift to p (i.e. move p)
+    p.x += 10
+    p.y += 20
+    print(f'p + (10, 20) = {p!r}')
