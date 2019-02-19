@@ -30,6 +30,8 @@ class Path:
         return self._points.__getitem__(key)
 
     def __setitem__(self, key, val):
+        if not isinstance(val, Point):
+            raise TypeError('expecting a Point')
         return self._points.__setitem__(key, val)
 
     def __delitem__(self, key):
@@ -39,15 +41,12 @@ class Path:
         return self._points.__contains__(obj)
 
     def append(self, item):
+        if not isinstance(item, Point):
+            raise TypeError('expecting a Point')
         return self._points.append(item)
 
-    # Should implement other relevant container methods
-    # count -> self._points.count
-    # extend -> self._points.extend
-    # insert -> self._points.insert
-    # pop -> self._points.pop
-    # remove -> self._points.remove
-    # reverse -> self._points.reverse
+    def __getattr__(self, key):
+        return getattr(self._points, key)
 
 
 if __name__ == '__main__':
