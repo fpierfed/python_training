@@ -7,15 +7,15 @@ class TypeChecker:
     required_type = object
 
     def __init__(self, name=None):
-        self.name = name
+        self.ivar_name = f'_{name}'
 
     def __get__(self, instance, owner=None):
-        return instance.__dict__[self.name]
+        return instance.__dict__[self.ivar_name]
 
     def __set__(self, instance, value):
         if not isinstance(value, self.required_type):
             raise TypeError(f'expecting a {self.required_type.__name__}')
-        instance.__dict__[self.name] = value
+        instance.__dict__[self.ivar_name] = value
 
 
 class NumberType(TypeChecker):
