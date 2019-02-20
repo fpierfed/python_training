@@ -25,14 +25,26 @@ class Patcher:
 
     # Pretend to be an Image
     def __getattr__(self, name):
-        if self.min_date <= self.image.date <= self.max_date:
+        if self.min_date <= self._image.date <= self.max_date:
             img = self.fn(self._image)
         else:
             img = self._image
         return getattr(img, name)
 
     def __setattr__(self, name, value):
-        if name == '_image':
+        if name in ('_image', 'min_date', 'max_date', 'fn'):
             super().__setattr__(name, value)
         else:
             return setattr(self._image, name, value)
+
+
+if __name__ == '__main__':
+    from datetime import datetime               # noqa
+
+    def shift(img):
+        img.ra += 1
+        return img
+
+    img = Image(datetime.now(), 10, 20, 'r')
+    patched_img = Patcher(img, datetime(2017, 1, 1), datetime.now(), shift)
+    print(f'Orifinal RA: {img.ra}, patched RA: {patched_img.ra}')
