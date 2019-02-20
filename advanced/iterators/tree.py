@@ -24,6 +24,9 @@ def _tree(root, exclude_dirs=None, indent=''):
     for entry in sorted(os.scandir(root), key=lambda e: e.name):
         if entry.is_dir() and entry.name not in exclude_dirs:
             yield from _tree(entry.path, exclude_dirs, indent=indent)
+            # ^^^^^^^^ equivalent to the code below
+            # for substr in _tree(entry.path, exclude_dirs, indent=indent):
+            #     yield substr
         elif not entry.is_dir():
             yield f'{indent}{entry.name}'
 
