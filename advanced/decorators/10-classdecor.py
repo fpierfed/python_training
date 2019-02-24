@@ -1,4 +1,5 @@
 # 10-classdecor.py
+import inspect
 from math import pi
 from numbers import Number
 
@@ -6,7 +7,7 @@ from numbers import Number
 class TypeChecker:
     required_type = object
 
-    def __init__(self, name=None):
+    def __init__(self, name):
         self.ivar_name = f'_{name}'
 
     def __get__(self, instance, owner=None):
@@ -20,8 +21,8 @@ class TypeChecker:
 
 def typechecked(cls):
     for name, attribute in vars(cls).items():
-        if isinstance(attribute, TypeChecker):
-            attribute.name = name
+        if inspect.isclass(attribute) and issubclass(attribute, TypeChecker):
+            setattr(cls, name, attribute(name))
     return cls
 
 
@@ -31,8 +32,8 @@ class NumberType(TypeChecker):
 
 @typechecked
 class Point:
-    x = NumberType()
-    y = NumberType()
+    x = NumberType
+    y = NumberType
 
     def __init__(self, x, y):
         self.x = x
@@ -51,8 +52,8 @@ class PointType(TypeChecker):
 
 @typechecked
 class Circle:
-    radius = NumberType()
-    center = PointType()
+    radius = NumberType
+    center = PointType
 
     def __init__(self, center, radius):
         self.center = center

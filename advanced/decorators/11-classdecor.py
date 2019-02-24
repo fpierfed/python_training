@@ -6,7 +6,7 @@ from numbers import Number
 class TypeChecker:
     required_type = object
 
-    def __init__(self, name=None):
+    def __init__(self, name):
         self.ivar_name = f'_{name}'
 
     def __get__(self, instance, owner=None):

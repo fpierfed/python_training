@@ -1,4 +1,5 @@
 # 05-prop_meta.py
+import inspect
 from math import pi
 from numbers import Number
 
@@ -6,7 +7,7 @@ from numbers import Number
 class TypeChecker:
     required_type = object
 
-    def __init__(self, name=None):
+    def __init__(self, name):
         self.ivar_name = f'_{name}'
 
     def __get__(self, instance, owner=None):
@@ -26,8 +27,8 @@ class TypeChecked(type):
     def __new__(meta, name, bases, dct):
         # Add the name to the TypeChecker call
         for attr_name, value in dct.items():
-            if isinstance(value, TypeChecker):
-                value.name = attr_name
+            if inspect.isclass(value) and issubclass(value, TypeChecker):
+                dct[attr_name] = value(attr_name)
         return super().__new__(meta, name, bases, dct)
 
 
@@ -36,8 +37,8 @@ class Typed(metaclass=TypeChecked):
 
 
 class Point(Typed):
-    x = NumberType()
-    y = NumberType()
+    x = NumberType
+    y = NumberType
 
     def __init__(self, x, y):
         self.x = x
@@ -55,8 +56,8 @@ class PointType(TypeChecker):
 
 
 class Circle(Typed):
-    radius = NumberType()
-    center = PointType()
+    radius = NumberType
+    center = PointType
 
     def __init__(self, center, radius):
         self.center = center
