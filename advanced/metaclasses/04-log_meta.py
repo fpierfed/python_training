@@ -10,20 +10,39 @@ def logged(fn):
 
 
 class LoggedType(type):
-    def __new__(meta, name, bases, dct):
-        for name, value in dct.items():
-            if callable(value):
-                dct[name] = logged(value)
-        return super().__new__(meta, name, bases, dct)
+    def __init__(cls, name, bases, dct):
+        for key, value in dct.items():
+            if key in ('__str__', '__repr__'):
+                # avoid infinite recursion due to the wrapper above.
+                pass                            # leave as it
+            elif callable(value):
+                setattr(cls, key, logged(value))
+        return super().__init__(name, bases, dct)
 
 
 class Point(metaclass=LoggedType):
-    # @logged                   <-- instread of this, we can use metaclasses
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-    # @logged
     def move(self, dx, dy):
         self.x += dx
         self.y += dy
+
+    def __repr__(self):
+        if 'x' in vars(self):
+            # The class is already init-ed
+            return f'Point({self.x}, {self.y})'
+        else:
+            # we are logging __init__(self, ...)
+            #                         ^^^^
+            return 'Point instance'
+
+    def __str__(self):
+        if 'x' in vars(self):
+            # The class is already init-ed
+            return f'{self.x}, {self.y}'
+        else:
+            # we are logging __init__(self, ...)
+            #                         ^^^^
+            return 'Point instance'
