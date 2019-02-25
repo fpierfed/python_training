@@ -1,4 +1,4 @@
-# 05-prop_meta.py
+# 06-inheritance.py
 import inspect
 from numbers import Number
 

@@ -1,4 +1,4 @@
-# # procs3_producer.py
+# procs3_producer.py
 from procs3_queue import QueueManager
 from base import fib
 

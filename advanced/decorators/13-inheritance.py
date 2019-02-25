@@ -1,4 +1,4 @@
-# 10-classdecor.py
+# 13-inheritance.py
 import inspect
 from numbers import Number
 
