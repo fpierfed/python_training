@@ -1,6 +1,21 @@
 # Advanced Python Course
 ## Three-Day Schedule
 
+### Target Audience
+This course is aimed at computer programmers who want to significantly improve 
+their knowledge of the Python programming language. Course attendees should be 
+able to write and debug programs in Python. More generally, they should be 
+familiar with core language features like basic data types, control flow, 
+classes, modules and functions.
+
+
+### Course Format
+This course consists of three full days of advanced Python classes in the form 
+of live presentations and coding exercises. Attendees are encouraged to bring 
+and work on their laptop computers. All course material will be made available 
+under an open-source (GPL version 3 or later) license.
+
+
 ### Day 1
 
 | Topic                    | Duration (') | Start | End   |
@@ -27,9 +42,8 @@
 | Metaclasses             | 60           | 11:30 | 12:30 |
 | Generators              | 60           | 12:30 | 13:30 |
 | *Lunch*                 | 60           | 13:30 | 14:30 |
-| Debugging & Profiling   | 30           | 14:30 | 15:00 |
-| Parallel Programming    | 30           | 15:00 | 15:30 |
-| Distributed Programming | 30           | 15:30 | 16:00
+| Parallel Programming    | 45           | 14:30 | 15:15 |
+| Distributed Programming | 45           | 15:15 | 16:00
 | Distributed Task Queues | 60           | 16:00 | 17:00 |
 
 
