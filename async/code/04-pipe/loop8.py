@@ -139,7 +139,7 @@ class Loop:
 class Future:
     def __init__(self):
         self.result = None
-        self._stop = False
+        self.done = False
 
     @property
     def result(self):
@@ -148,10 +148,10 @@ class Future:
     @result.setter
     def result(self, value):
         self._result = value
-        self._stop = True
+        self.done = True
 
     def __iter__(self):
-        while not self._stop:
+        while not self.done:
             yield from sleep(0)
         return self.result
 

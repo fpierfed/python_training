@@ -79,6 +79,8 @@ class Loop:
         self._stop = True
 
     def run_until_complete(self, coroutine):
+        self._stop = False
+
         task = self.create_task(coroutine)
         task.add_done_callback(self._stop_loop_cb)
         self.run_forever()
@@ -111,7 +113,7 @@ class Loop:
 class Future:
     def __init__(self):
         self.result = None
-        self._stop = False
+        self.done = False
 
     @property
     def result(self):
@@ -120,10 +122,10 @@ class Future:
     @result.setter
     def result(self, value):
         self._result = value
-        self._stop = True
+        self.done = True
 
     def __iter__(self):
-        while not self._stop:
+        while not self.done:
             yield
         return self.result
 
