@@ -1,5 +1,6 @@
 # procs4_benchmark.py
 from multiprocessing import Process
+import sys
 import time
 import redis
 
@@ -7,15 +8,16 @@ import redis
 def worker(inputq, outputq, n):
     conn = redis.StrictRedis('localhost')
     for _ in range(n):
-        res = None
-        while res is None:
-            res = conn.lpop(inputq)
+        _, res = conn.blpop(inputq)
         conn.lpush(outputq, res)
 
 
 if __name__ == '__main__':
     N = 10000
-    NWORKERS = 1
+    try:
+        NWORKERS = max(1, int(sys.argv[1]))
+    except Exception:
+        NWORKERS = 1
 
     tasks = 'tasks'
     results = 'results'
