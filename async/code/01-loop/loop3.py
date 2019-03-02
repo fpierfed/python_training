@@ -1,22 +1,15 @@
 # loop3.py
-import enum
-
-
-class TaskState(enum.Enum):
-    PENDING = 1
-    RUNNING = 2
-    DONE = 3
-
-
 class Task:
+    _task_id = 0
+
     def __init__(self, coroutine):
-        self.id = id(self)
+        Task._task_id += 1
+        self.id = Task._task_id
 
         self._coroutine = coroutine
         self._callbacks = []
 
     def __next__(self):
-        self._state = TaskState.RUNNING
         return self._coroutine.__next__()
 
     def add_done_callback(self, callback):

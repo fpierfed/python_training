@@ -11,10 +11,11 @@ class Foo:
         return 42
 
 
-# g = iter(Foo())
-# while True:
-#     try:
-#         next(g)
-#     except StopIteration as e:
-#         print(f'Coroutine returned {e.value}')
-#         break
+if __name__ == '__main__':
+    g = iter(Foo())
+    while True:
+        try:
+            next(g)
+        except StopIteration as e:
+            print(f'Coroutine returned {e.value}')
+            break

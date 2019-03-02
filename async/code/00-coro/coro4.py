@@ -10,8 +10,9 @@ def bar(coro):
     yield 99
 
 
-# g = bar(foo())
-# next(g)
-# next(g)
-# next(g)
-# next(g)
+if __name__ == '__main__':
+    g = bar(foo())
+    next(g)
+    next(g)
+    next(g)
+    next(g)

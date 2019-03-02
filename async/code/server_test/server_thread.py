@@ -7,7 +7,7 @@ def server(address):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(address)
-    s.listen(5)
+    s.listen(10)
 
     while True:
         client, addr = s.accept()

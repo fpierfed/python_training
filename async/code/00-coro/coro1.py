@@ -9,8 +9,9 @@ def foo():
     print('World')
 
 
-# g = foo()
-# next(g)
-# next(g)
-# next(g)
-# next(g)
+if __name__ == '__main__':
+    g = foo()
+    next(g)
+    next(g)
+    next(g)
+    next(g)

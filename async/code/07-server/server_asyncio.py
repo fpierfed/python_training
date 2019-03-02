@@ -8,7 +8,7 @@ async def server(address, loop):
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.setblocking(False)
     s.bind(address)
-    s.listen(5)
+    s.listen(10)
 
     while True:
         client, addr = await loop.sock_accept(s)

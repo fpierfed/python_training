@@ -1,33 +1,25 @@
 # loop7.py
-import enum
 import time
 
 
 _EVENT_LOOP = None
 
 
-class TaskState(enum.Enum):
-    PENDING = 1
-    RUNNING = 2
-    DONE = 3
-
-
 class Task:
     _all_tasks = set()
 
     def __init__(self, coroutine):
-        self.id = id(self)
         Task._all_tasks.add(self)
+        self.id = len(Task._all_tasks)
 
         self._coroutine = coroutine
         self._callbacks = []
 
-        self._state = TaskState.PENDING
         self.result = None
         self.exception = None
+        self.done = False
 
     def __next__(self):
-        self._state = TaskState.RUNNING
         return self._coroutine.__next__()
 
     @classmethod
@@ -48,16 +40,12 @@ class Task:
         return self._callbacks
 
     @property
-    def done(self):
-        return self._state is TaskState.DONE
-
-    @property
     def result(self):
         return self._result
 
     @result.setter
     def result(self, value):
-        self._state = TaskState.DONE
+        self.done = True
         self._result = value
 
     @property
@@ -66,7 +54,7 @@ class Task:
 
     @exception.setter
     def exception(self, value):
-        self._state = TaskState.DONE
+        self.done = True
         self._exception = value
 
 

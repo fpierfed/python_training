@@ -8,7 +8,7 @@ def server(address, loop):
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.setblocking(False)
     s.bind(address)
-    s.listen(5)
+    s.listen(10)
 
     while True:
         client, addr = yield from loop.sock_accept(s)
@@ -18,7 +18,7 @@ def server(address, loop):
 
 def connection_handler(client, loop):
     while True:
-        data = yield from loop.sock_recv(client, 10000)
+        data = yield from loop.sock_recv(client, 1000)
         if not data:
             break
         yield from loop.sock_sendall(client, data)

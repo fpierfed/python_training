@@ -10,10 +10,11 @@ def foo():
     return 42
 
 
-# g = foo()
-# while True:
-#     try:
-#         next(g)
-#     except StopIteration as e:
-#         print(f'Coroutine returned {e.value}')
-#         break
+if __name__ == '__main__':
+    g = foo()
+    while True:
+        try:
+            next(g)
+        except StopIteration as e:
+            print(f'Coroutine returned {e.value}')
+            break

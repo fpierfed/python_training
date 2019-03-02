@@ -1,7 +1,10 @@
 # loop2.py
 class Task:
+    _task_id = 0
+
     def __init__(self, coroutine):
-        self.id = id(self)
+        Task._task_id += 1
+        self.id = Task._task_id
 
         self._coroutine = coroutine
 
