@@ -14,12 +14,8 @@ def long_running_function(n):
 
 def high_cpu_function(n):
     """Burn CPU cycles for n seconds."""
-    t0 = time.time()
-
-    i = 0
-    while time.time() - t0 < n:
-        i += 1
-    return i
+    while n:
+        n -= 1
 
 
 if __name__ == '__main__':
@@ -29,8 +25,8 @@ if __name__ == '__main__':
     # loop.run_until_complete(asyncio.wait([
     #     long_running_function(10),
     #     long_running_function(10),
-    #     high_cpu_function(10),
-    #     high_cpu_function(10),
+    #     high_cpu_function(245000000),
+    #     high_cpu_function(245000000),
     # ]))
 
     # Better
@@ -38,8 +34,8 @@ if __name__ == '__main__':
     # loop.run_until_complete(asyncio.wait([
     #     loop.run_in_executor(executor, long_running_function, 10),
     #     loop.run_in_executor(executor, long_running_function, 10),
-    #     loop.run_in_executor(executor, high_cpu_function, 10),
-    #     loop.run_in_executor(executor, high_cpu_function, 10),
+    #     loop.run_in_executor(executor, high_cpu_function, 245000000),
+    #     loop.run_in_executor(executor, high_cpu_function, 245000000),
     # ]))
 
     # Best?
@@ -47,6 +43,6 @@ if __name__ == '__main__':
     loop.run_until_complete(asyncio.wait([
         loop.run_in_executor(executor, long_running_function, 10),
         loop.run_in_executor(executor, long_running_function, 10),
-        loop.run_in_executor(executor, high_cpu_function, 10),
-        loop.run_in_executor(executor, high_cpu_function, 10),
+        loop.run_in_executor(executor, high_cpu_function, 245000000),
+        loop.run_in_executor(executor, high_cpu_function, 245000000),
     ]))
