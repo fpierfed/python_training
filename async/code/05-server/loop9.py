@@ -76,9 +76,6 @@ class Loop:
         self._tasks.append(task)
         return task
 
-    def remove(self, task):
-        self.tasks.remove(task)
-
     def _stop_loop_cb(self, task):
         self._stop = True
 

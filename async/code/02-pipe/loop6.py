@@ -68,9 +68,6 @@ class Loop:
         print(f'Added Task {task.id}')
         return task
 
-    def remove(self, task):
-        self._tasks.remove(task)
-
     def run_forever(self):
         while True:
             if not self._tasks:
