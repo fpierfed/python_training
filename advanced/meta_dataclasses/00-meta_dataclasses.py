@@ -43,9 +43,12 @@ class Point(Typed):
     x: Number
     y: Number
 
-    def move_by(self, dx, dy):
-        self.x += dx
-        self.y += dy
+    def __str__(self):
+        return f'{self.x}, {self.y}'
+
+
+class Point3D(Point):
+    z: Number
 
     def __str__(self):
-        return f'A Point at {self.x}, {self.y}'
+        return f'{self.x}, {self.y}, {self.z}'
