@@ -98,9 +98,6 @@ class Loop:
             self._selector.unregister(key.fileobj)
             self._tasks.append(task)
 
-        # Wake up time!
-        self._wakeup_sleeping_tasks()
-
     def run_until_complete(self, coroutine):
         task = self.create_task(coroutine)
         task.add_done_callback(self._stop_loop_cb)
