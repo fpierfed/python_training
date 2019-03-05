@@ -18,7 +18,8 @@ class Point:
 
     def __getattr__(self, key):
         print(f'Attribute {key} is missing')
-        return super().__getattr__(key)
+        # return super().__getattr__(key)           <-- FAIL
+        raise AttributeError(f'unknown attribute {key}')
 
 
 if __name__ == '__main__':
