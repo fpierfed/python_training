@@ -1,60 +1,37 @@
 # 01-mixins.py
-"""
-Mixins are classes that are not part of any given class hierarchy  and do not
-stand on their own.
+class Person:
+    def foo(self):
+        print(f'Person.foo')
 
-They are useful to give extra functionality to a given class (and play well in
-any hierarchy by calling super()).
-"""
-import random
+    def bar(self):
+        print('Person.bar')
 
 
-def source(n=10):
-    while n:
-        yield random.randint(1, 10)
-        n -= 1
+class Child(Person):
+    def bar(self, x):
+        print('Child.bar')
+        super().bar()       # <-- which args should we use here?
 
 
-class Echo:
-    def __init__(self, source):
-        for number in source:
-            result = self.process(number)
-            print(f'{number} -> {result}')
-
-    def process(self, n):
-        return n
+class AnotherChild(Person):
+    def bar(self, x, y):
+        print('AnotherChild.bar')
+        super().bar()
 
 
-class EchoPlusOne(Echo):
-    def process(self, n):
-        n = super().process(n)
-        return n + 1
+class ChildMixIn:
+    def bar(self, x):       # <-- simpler but not a silber bullet
+        print('ChildMixIn.bar')
+        super().bar(x)
 
 
-class EvenMixIn:
-    def process(self, n):
-        n = super().process(n)
-        if not n % 2:
-            return n
+class MIGrandSon(ChildMixIn, Child):
+    def bar(self, x, y, z):
+        print('GrandSon.bar')
+        super().bar(x)
 
 
-class EchoPlusOneEven(EvenMixIn, EchoPlusOne):
-    pass
-
-
-def format_mro(obj):
-    return ' -> '.join([c.__name__ for c in obj.__class__.__mro__])
-
-
-if __name__ == '__main__':
-    print('Echo:')
-    foo = Echo(source(5))
-    print(f'{foo.__class__.__name__}.__mro__: {format_mro(foo)}\n')
-
-    print('EchoPlusOne:')
-    foo = EchoPlusOne(source(5))
-    print(f'{foo.__class__.__name__}.__mro__: {format_mro(foo)}\n')
-
-    print('EchoPlusOneEven:')
-    foo = EchoPlusOneEven(source(5))
-    print(f'{foo.__class__.__name__}.__mro__: {format_mro(foo)}\n')
+class GrandSon(Child, AnotherChild):
+    def bar(self, x, y, z):
+        print('GrandSon.bar')
+        super().bar(x)
