@@ -1,6 +1,7 @@
 # 02-server_thread.py
 import argparse
 import socket
+from multiprocessing import Process
 from threading import Thread
 
 
@@ -34,19 +35,31 @@ class ThreadingMixIn:
         Thread(target=super().handle_connection, args=(client, )).start()
 
 
+class ForkingMixIn:
+    def handle_connection(self, client):
+        Process(target=super().handle_connection, args=(client, )).start()
+
+
 class ThreadingServer(ThreadingMixIn, Server):
+    pass
+
+
+class ForkingServer(ForkingMixIn, Server):
     pass
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('mode', type=str, choices=('standard', 'threaded'),
+    parser.add_argument('mode', type=str,
+                        choices=('standard', 'threaded', 'forking'),
                         nargs='?', default='standard')
     args = parser.parse_args()
 
     print(f'Mode: {args.mode}')
     if args.mode == 'threaded':
         server = ThreadingServer(('localhost', 9999))
+    elif args.mode == 'forking':
+        server = ForkingServer(('localhost', 9999))
     else:
         server = Server(('localhost', 9999))
 
