@@ -1,4 +1,4 @@
-# 02-server_thread.py
+# 02-server_mixins.py
 import argparse
 import socket
 from multiprocessing import Process
