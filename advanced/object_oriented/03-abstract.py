@@ -15,6 +15,8 @@ class Shape:
     @classmethod
     def foo(cls):
         raise NotImplementedError()
+
+    ...
 """
 import abc
 
@@ -30,4 +32,9 @@ class Shape(abc.ABC):
 
     @abc.abstractclassmethod
     def foo(cls):
+        pass
+
+    @property
+    @abc.abstractmethod
+    def area(self):
         pass
