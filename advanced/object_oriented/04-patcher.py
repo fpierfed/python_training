@@ -1,3 +1,4 @@
+# 04-patcher.py
 class Image:
     def __init__(self, date, ra, dec, fltr):
         self.date = date
