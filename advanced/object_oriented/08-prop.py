@@ -16,7 +16,9 @@ class TypeChecker:
         return instance.__dict__[self.ivar_name]
 
     def __set__(self, instance, value):
-        if not isinstance(value, self.required_type):
+        # Beware: bool is a subclass of int (for historical reasons)
+        if not isinstance(value, self.required_type) or \
+                (self.required_type != bool and isinstance(value, bool)):
             raise TypeError(f'expecting a {self.required_type.__name__}')
         instance.__dict__[self.ivar_name] = value
 

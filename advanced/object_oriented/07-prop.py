@@ -12,7 +12,9 @@ def check_type(name, required_type):
 
     @ivar.setter
     def ivar(self, value):
-        if not isinstance(value, required_type):
+        # Beware: bool is a subclass of int (for historical reasons)
+        if not isinstance(value, required_type) or \
+                (required_type != bool and isinstance(value, bool)):
             raise TypeError(f'expecting a {required_type.__name__}')
         setattr(self, ivar_name, value)
     return ivar
