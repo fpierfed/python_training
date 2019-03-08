@@ -16,6 +16,6 @@ QueueManager.register('get_resultq', callable=lambda: results)
 
 
 if __name__ == '__main__':
-    manager = QueueManager(address=('', 9999), authkey=b'foo')
+    manager = QueueManager(address=('0.0.0.0', 9999), authkey=b'foo')
     server = manager.get_server()
     server.serve_forever()
