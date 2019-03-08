@@ -2,16 +2,16 @@
 class SimpleRange:
     def __init__(self, n):
         self.n = n
-        self._current = 0
+        self._current = None
 
     def __iter__(self):
-        self._current = 0
+        self._current = -1
         return self
 
     def __next__(self):
+        self._current += 1
         if self._current < self.n:
-            self._current += 1
-            return self._current - 1
+            return self._current
         raise StopIteration()
 
 
