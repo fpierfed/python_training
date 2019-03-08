@@ -1,19 +1,31 @@
 # 03-gen.py
 
 
-def subgen():
-    yield 42
+def subgen(n):
+    while n >= 0:
+        yield n
+        n -= 1
+    # raise Exception('foo')
+    return 99
 
 
 def gen():
-    yield from subgen()
+    try:
+        yield from subgen(3)
+    except Exception as e:
+        print('Got', e)
+    yield 42
 
 
-# gen is equivalent to
+# gen is equivalent to this:
 def raw_gen():
-    g = subgen()
-    while True:
-        try:
-            yield next(g)
-        except StopIteration as e:
-            return e.value
+    g = subgen(3)
+    try:
+        while True:
+            try:
+                yield next(g)
+            except StopIteration:
+                break
+    except Exception as e:
+        print('Got', e)
+    yield 42
