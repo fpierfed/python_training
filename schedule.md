@@ -44,26 +44,26 @@ under an open-source (GPL version 3 or later) license.
 | AST                     | 60           | 11:30 | 12:30 |
 | Parallel Programming    | 60           | 12:30 | 13:30 |
 | *Lunch*                 | 60           | 13:30 | 14:30 |
-| Distributed Programming | 30           | 14:30 | 15:00 |
-| Distributed Task Queues | 60           | 15:00 | 16:00 |
-| Iterators               | 30           | 16:00 | 16:30 |
-| Generators              | 60           | 16:30 | 17:30 |
+| Iterators               | 30           | 14:30 | 15:00 |
+| Generators              | 60           | 15:00 | 16:00 |
+| Async Introduction      | 30           | 16:00 | 16:30 |
+| Coroutines              | 15           | 16:30 | 16:45 |
 
 
 ### Day 3
 
-| Topic                 | Duration (') | Start | End   |
-| ---                   | ---          | ---   | ---   |
-| Review of Day 2       | 15           | 9:30  | 9:45  |
-| Async Introduction    | 30           | 9:45  | 10:15 |
-| Coroutines            | 15           | 10:15 | 10:30 |
-| Event Loop (loop1)    | 30           | 10:30 | 11:00 |
-| loo2 + loop3          | 30           | 11:00 | 11:30 |
-| loop4                 | 30           | 11:30 | 12:00 |
-| loop5                 | 30           | 12:00 | 12:30 |
-| pipe1 + loop6         | 40           | 12:30 | 13:10 |
-| *Lunch*               | 60           | 13:10 | 14:10 |
-| pipe2 + loop7         | 90           | 14:10 | 15:40 |
-| pipe3 + loop8         | 60           | 15:40 | 16:40 |
-| server + loop9        | 60           | 16:40 | 17:40 |
-| pipe + server asyncio | 30           | 17:40 | 18:10 |
+| Topic                   | Duration (') | Start | End   |
+| ---                     | ---          | ---   | ---   |
+| Review of Day 2         | 15           |  9:30 |  9:45 |
+| Event Loop (loop1)      | 30           |  9:45 | 10:15 |
+| loo2 + loop3            | 30           | 10:15 | 10:45 |
+| loop4                   | 30           | 10:45 | 11:15 |
+| loop5                   | 30           | 11:15 | 11:45 |
+| pipe1 + loop6           | 45           | 11:45 | 12:30 |
+| *Lunch*                 | 60           | 12:30 | 13:30 |
+| pipe2 + loop7           | 90           | 13:30 | 15:00 |
+| pipe3 + loop8           | 60           | 15:00 | 16:00 |
+| server + loop9          | 60           | 16:00 | 17:00 |
+| pipe + server asyncio   | 30           | ?     | ?     |
+| Distributed Programming | 30           | ?     | ?     |
+| Distributed Task Queues | 60           | ?     | ?     |
