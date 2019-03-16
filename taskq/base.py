@@ -1,11 +1,11 @@
 # base.py
 def fib(n):
+    if n < 0:
+        raise Exception('fib(n) is undefined for n < 0')
+    if n == 0:
+        return 0
     if n <= 2:
         return 1
-    elif n == 0:
-        return 0
-    elif n < 0:
-        raise Exception('fib(n) is undefined for n < 0')
     return fib(n - 1) + fib(n - 2)
 
 

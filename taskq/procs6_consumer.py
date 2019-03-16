@@ -3,19 +3,10 @@ import multiprocessing as mp
 import json
 import uuid
 import redis
+from base import fib
 
 
 REDIS_HOST = 'localhost'
-
-
-def fib(n):
-    if n <= 2:
-        return 1
-    elif n == 0:
-        return 0
-    elif n < 0:
-        raise Exception('fib(n) is undefined for n < 0')
-    return fib(n - 1) + fib(n - 2)
 
 
 def worker(inputq, outputq):
