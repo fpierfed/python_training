@@ -102,3 +102,7 @@ ENV/
 
 # macOS
 .DS_Store
+
+# Various Stuff
+*.mov
+*.pages
